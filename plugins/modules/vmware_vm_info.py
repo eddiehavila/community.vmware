@@ -325,8 +325,9 @@ class VmwareVmInfo(PyVmomi):
                 self.module.fail_json(msg="Failed to find folder specified by %(folder)s" % self.params)
 
         vm_name = self.params.get('vm_name')
-        if vm_name:
-            virtual_machine = find_vm_by_name(self.content, vm_name=vm_name, folder=folder_obj)
+        if vm_name:            
+            #virtual_machine = find_vm_by_name(self.content, vm_name=vm_name, folder=folder_obj)
+            virtual_machine = find_vm_by_name(self.content, vm_name=vm_name, folder=folder_obj,si=self.si)
             if not virtual_machine:
                 self.module.fail_json(msg="Failed to find virtual machine %s" % vm_name)
             else:
