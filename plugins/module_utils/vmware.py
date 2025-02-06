@@ -324,21 +324,24 @@ def find_dvspg_by_name(dv_switch, portgroup_name):
     return None
 
 
-def find_object_by_name(content, name, obj_type, folder=None, recurse=True):
-    if not isinstance(obj_type, list):
-        obj_type = [obj_type]
+def find_object_by_name(content, name, obj_type, folder=None, recurse=True, si=None):
+    obj = find_obj(content=content, name=name, vimtype=obj_type, first=True, folder=folder, si=si)
+    return obj
 
-    name = name.strip()
-
-    objects = get_all_objs(content, obj_type, folder=folder, recurse=recurse)
-    for obj in objects:
-        try:
-            if unquote(obj.name) == name:
-                return obj
-        except vmodl.fault.ManagedObjectNotFound:
-            pass
-
-    return None
+#def find_object_by_name(content, name, obj_type, folder=None, recurse=True):
+#    if not isinstance(obj_type, list):
+#        obj_type = [obj_type]
+#    name = name.strip()
+#
+#    objects = get_all_objs(content, obj_type, folder=folder, recurse=recurse)
+#    for obj in objects:
+#        try:
+#            if unquote(obj.name) == name:
+#                return obj
+#        except vmodl.fault.ManagedObjectNotFound:
+#            pass
+#
+#    return None
 
 
 def find_all_objects_by_name(content, name, obj_type, folder=None, recurse=True):
