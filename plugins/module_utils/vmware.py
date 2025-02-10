@@ -511,8 +511,9 @@ def find_vm_by_id(content, vm_id, vm_id_type="vm_name", datacenter=None,
     return vm
 
 
-def find_vm_by_name(content, vm_name, folder=None, recurse=True):
-    return find_object_by_name(content, vm_name, [vim.VirtualMachine], folder=folder, recurse=recurse)
+def find_vm_by_name(content, vm_name, folder=None, recurse=True, si=None):
+    #return find_object_by_name(content, vm_name, [vim.VirtualMachine], folder=folder, recurse=recurse)
+    return find_obj(content=content, name=vm_name, vimtype=[vim.VirtualMachine], folder=folder, first=True, si=si)
 
 
 def find_host_portgroup_by_name(host, portgroup_name):
